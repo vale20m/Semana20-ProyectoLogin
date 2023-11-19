@@ -1,17 +1,21 @@
-// Colocamos las rutas (o endpoints) sobre los que trabajamos
+// Colocamos las rutas (o endpoints) sobre los que trabajamos, y que funciones se ejecutaran en cada uno de ellos
 
 const express = require("express");
 const userController = require("../controllers/userController");
 const userRouter = express.Router();
 
-userRouter.get("/", userController.getUsers);
+userRouter.post("/login", userController.getToken);
 
-userRouter.get("/:email", userController.getUserByEmail);
+userRouter.get("/usuarios", userController.getUsers);
 
-userRouter.post("/", userController.postUser);
+userRouter.get("/usuarios/:email", userController.getUserByEmail);
 
-userRouter.put("/:email", userController.putUser);
+userRouter.post("/usuarios", userController.postUser);
 
-userRouter.delete("/:email", userController.deleteUser);
+userRouter.put("/usuarios/changePassword/:email", userController.putUserPassword);
+
+userRouter.put("/usuarios/changeEmail/:email", userController.putUserEmail);
+
+userRouter.delete("/usuarios/:email", userController.deleteUser);
 
 module.exports = userRouter;

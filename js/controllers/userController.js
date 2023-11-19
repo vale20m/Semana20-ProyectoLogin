@@ -4,6 +4,13 @@ const userModel = require("../models/userModel");
 
 // Manejamos las peticiones GET
 
+const getToken = async (req, res) => {
+
+    const token = await userModel.getToken(req.body);
+    res.json(token);
+
+}
+
 const getUsers = async (req, res) => {
 
     const users = await userModel.getUsers();
@@ -29,9 +36,16 @@ const postUser = async (req, res) => {
 
 // Manejamos las peticiones PUT
 
-const putUser = async (req, res) => {
+const putUserPassword = async (req, res) => {
 
-    const user = await userModel.putUser(req.params.email, req.body);
+    const user = await userModel.putUserPassword(req.params.email, req.body);
+    res.json(user[0]);
+
+}
+
+const putUserEmail = async (req, res) => {
+
+    const user = await userModel.putUserEmail(req.params.email, req.body);
     res.json(user[0]);
 
 }
@@ -46,9 +60,11 @@ const deleteUser = async (req, res) => {
 }
 
 module.exports = {
+    getToken,
     getUsers,
     getUserByEmail,
     postUser,
-    putUser,
+    putUserPassword,
+    putUserEmail,
     deleteUser
 }
